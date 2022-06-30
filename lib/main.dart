@@ -22,41 +22,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-_launchURLBrowserLinkedin() async {
-  var url = Uri.parse("https://www.linkedin.com/in/ahmad-shakir-1a6a95226/");
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-_launchURLBrowserFacebook() async {
-  var url = Uri.parse("https://www.facebook.com/Ahmad.Shakir.Khalid");
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-_launchURLBrowserTwitter() async {
-  var url = Uri.parse("https://twitter.com/home");
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-_launchURLBrowserGitHub() async {
-  var url = Uri.parse("https://github.com/ahmadshakir21");
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -67,13 +32,41 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String linkedinUrl = "https://www.linkedin.com/in/ahmad-shakir-1a6a95226/";
-  String facebookUrl = "https://www.facebook.com/Ahmad.Shakir.Khalid";
-  String twitterUrl = "https://twitter.com/home";
-  String githubUrl = "https://github.com/ahmadshakir21";
+  void _launch(String _url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
+  }
 
   @override
   Widget build(BuildContext context) {
+    Widget containerButton(
+        {required String urlText,
+        required IconData icon,
+        required Color color,
+        required VoidCallback onPressed}) {
+      return InkWell(
+        onTap: onPressed,
+        child: Container(
+          color: color,
+          width: 370,
+          height: 50,
+          child: Row(children: [
+            const SizedBox(
+              width: 20,
+            ),
+            FaIcon(icon),
+            const SizedBox(
+              width: 113,
+            ),
+            Text(
+              urlText,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            )
+          ]),
+        ),
+      );
+    }
+
     return Scaffold(
       body: Column(
         children: [
@@ -109,64 +102,48 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(
             height: 20,
           ),
-          InkWell(
-           onTap: _launchURLBrowserLinkedin,
-            child: Container(
-              color: Color.fromARGB(171, 160, 154, 216),
-              width: 370,
-              height: 50,
-              child: const ListTile(
-                leading: FaIcon(FontAwesomeIcons.linkedin),
-                title: Text("Linkedin"),
-              ),
-            ),
-          ),
+          containerButton(
+              urlText: "LinkedIn",
+              icon: FontAwesomeIcons.linkedin,
+              color: const Color(0xFF3CACAE),
+              onPressed: () {
+                const url =
+                    "https://www.linkedin.com/in/ahmad-shakir-1a6a95226/";
+                _launch(url);
+              }),
           const SizedBox(
             height: 20,
           ),
-          InkWell(
-            onTap: _launchURLBrowserFacebook,
-              
-            child: Container(
-              color: Color.fromARGB(171, 66, 236, 177),
-              width: 370,
-              height: 50,
-              child: const ListTile(
-                leading: FaIcon(FontAwesomeIcons.facebook),
-                title: Text("FaceBook"),
-              ),
-            ),
-          ),
+          containerButton(
+              urlText: "Facebook",
+              icon: FontAwesomeIcons.facebook,
+              color: const Color(0xFFE0A030),
+              onPressed: () {
+                const url = "https://www.facebook.com/Ahmad.Shakir.Khalid";
+                _launch(url);
+              }),
           const SizedBox(
             height: 20,
           ),
-          InkWell(
-            onTap: _launchURLBrowserTwitter,
-            child: Container(
-              color: Color.fromARGB(171, 241, 69, 239),
-              width: 370,
-              height: 50,
-              child: const ListTile(
-                leading: FaIcon(FontAwesomeIcons.twitter),
-                title: Text("Twitter"),
-              ),
-            ),
-          ),
+          containerButton(
+              urlText: "Twitter",
+              icon: FontAwesomeIcons.twitter,
+              color: const Color(0xFFFF2768),
+              onPressed: () {
+                const url = "https://twitter.com/home";
+                _launch(url);
+              }),
           const SizedBox(
             height: 20,
           ),
-          InkWell(
-            onTap: _launchURLBrowserGitHub,
-            child: Container(
-              color: Color.fromARGB(171, 238, 205, 56),
-              width: 370,
-              height: 50,
-              child: const ListTile(
-                leading: FaIcon(FontAwesomeIcons.github),
-                title: Text("Github"),
-              ),
-            ),
-          ),
+          containerButton(
+              urlText: "Github",
+              icon: FontAwesomeIcons.github,
+              color: const Color(0xFFC26DBC),
+              onPressed: () {
+                const url = "https://github.com/ahmadshakir21";
+                _launch(url);
+              }),
           const SizedBox(
             height: 20,
           ),
@@ -190,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   radius: 30,
                   backgroundColor: Color.fromARGB(255, 240, 193, 105),
                   child: FaIcon(
-                    FontAwesomeIcons.message,
+                    FontAwesomeIcons.solidMessage,
                     size: 30,
                   )),
             ),

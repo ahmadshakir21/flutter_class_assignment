@@ -14,7 +14,7 @@ class Message extends StatelessWidget {
             padding: EdgeInsets.only(top: 80, bottom: 30),
             child: Text(
               "Message",
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(fontSize: 25 , color: Colors.black),
             ),
           )),
           Container(
@@ -79,7 +79,7 @@ class Message extends StatelessWidget {
             height: 20,
           ),
           const Center(
-            child: Text("Send a message" , style: TextStyle(fontSize: 20),),
+            child: Text("Send a message" , style: TextStyle(fontSize: 20 , color: Colors.black),),
           ),
           const SizedBox(
             height: 20,
@@ -93,7 +93,7 @@ class Message extends StatelessWidget {
                     hintText: 'Message',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Colors.grey)))),
+                        borderSide: const BorderSide(color: Colors.black)))),
           ),
         ]),
       ),
