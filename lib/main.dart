@@ -162,11 +162,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => Message(),
                       ));
                 },
-                child: const Icon(
-                  Icons.chat,
-                  size: 40,
-                  color: Color(0xFF333652),
-                ),
+                child: const FaIcon(
+                FontAwesomeIcons.facebookMessenger,
+                size: 40,
+                color: Color.fromARGB(255, 69, 105, 250),
+              ),
               ),
               const FaIcon(
                 FontAwesomeIcons.telegram,
